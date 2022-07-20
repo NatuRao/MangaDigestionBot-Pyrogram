@@ -153,6 +153,8 @@ class mangakakalot:
                 document=f"pdf_files/{manganame}.pdf"
             )
 
+            os.remove(f"pdf_files/{manganame}.pdf")
+
             del chapternum
             del pages
             del manganame
@@ -165,6 +167,119 @@ class mangakakalot:
             )
 
             print(f"Exception {e}")
+
+
+    @bot.on_callback_query(filters=filters.regex(r'rkalotpage:'))
+    async def event_handler_kalot(client: Client, callback: CallbackQuery):
+
+        await bot.send_photo(
+            chat_id=callback.from_user.id,
+            caption="Sit back and relax, your chapters are downloading...",
+            photo="https://telegra.ph/file/d7ad39a9394af5e9ea300.jpg"
+        )
+
+        try:
+            for name, link in pagi_obj.ch_linkname[pagi_obj.current_page - 1].items():
+                chapterid = link.split('/')[-2]
+                chapternum = link.split('/')[-1]
+                pages = kalot.get_chapter_pages(chapterid, chapternum)
+
+                if pages == "Invalid Mangaid or chapter number":
+                    await bot.send_message(
+                        chat_id=callback.from_user.id,
+                        text="Something went wrong.....\nCheck if you entered command properly\nCommon mistakes:\nYou didnt mention chapter number\nyou added space after : , dont leave space\n\n\\@MangaDigestionCommunity if you have any further doubts"
+                    )
+
+                    return
+
+                manganame = format.manga_chapter_pdf(chapterid, chapternum, pages, pagi_obj.manganame)
+
+                print("Sending...")
+
+                await bot.send_document(
+                    chat_id=callback.from_user.id,
+                    caption=manganame,
+                    document=f"pdf_files/{manganame}.pdf"
+                )
+
+                os.remove(f"pdf_files/{manganame}.pdf")
+
+            del chapterid
+            del chapternum
+            del pages
+            del manganame
+            gc.collect()
+        
+        except Exception as e:
+            await bot.send_message(
+                chat_id=callback.from_user.id,
+                text="Something went wrong.....\nCheck if you entered command properly, or The Manga you chose have no manga chapters available.\n\nUse /help or go to \n@MangaDigestionCommunity if you have any doubts"
+            )
+
+            print(f"Exception {e}")
+
+    
+    @bot.on_callback_query(filters=filters.regex(r'rkalotall:'))
+    async def event_handler_kalot(client: Client, callback: CallbackQuery):
+
+        # try:
+        mangaid = callback.data
+        mangaid = mangaid.split(':')
+        mangaid.pop(0)
+        mangaid = ''.join(mangaid)
+
+        pagi_obj.mangaid = mangaid
+        chapternames, chapterlinks = kalot.get_all_manga_chapter(mangaid)
+
+        await callback.message.delete()
+
+        await bot.send_photo(
+            chat_id=callback.from_user.id,
+            caption="Sit back and relax, your chapters are downloading...",
+            photo="https://telegra.ph/file/d7ad39a9394af5e9ea300.jpg"
+        )
+
+        for i in range(len(chapternames)):
+            chapterid = chapterlinks[i].split('/')[-2]
+            chapternum = chapterlinks[i].split('/')[-1]
+            pages = kalot.get_chapter_pages(chapterid, chapternum)
+
+            if pages == "Invalid Mangaid or chapter number":
+                await bot.send_message(
+                    chat_id=callback.from_user.id,
+                    text="Something went wrong.....\nCheck if you entered command properly\nCommon mistakes:\nYou didnt mention chapter number\nyou added space after : , dont leave space\n\n\\@MangaDigestionCommunity if you have any further doubts"
+                )
+
+                return
+
+            manganame = format.manga_chapter_pdf(chapterid, chapternum, pages, pagi_obj.manganame)
+
+            print("Sending...")
+
+            await bot.send_document(
+                chat_id=callback.from_user.id,
+                caption=manganame,
+                document=f"pdf_files/{manganame}.pdf"
+            )
+
+            os.remove(f"pdf_files/{manganame}.pdf")
+
+        del mangaid
+        del chapternames
+        del chapterlinks
+        del chapterid
+        del chapternum
+        del pages
+        del manganame
+        gc.collect()
+
+        # except Exception as e:
+        #     await bot.send_message(
+        #         chat_id=callback.from_user.id,
+        #         text="Something went wrong.....\nCheck if you entered command properly, or The Manga you chose have no manga chapters available.\n\nUse /help or go to \n@MangaDigestionCommunity if you have any doubts"
+        #     )
+
+        #     print(f"Exception {e}")
     
 
 

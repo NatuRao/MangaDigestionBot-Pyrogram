@@ -87,7 +87,6 @@ def pages_pdf_conversion(manganame, list_of_links):
         del height
         del link
         del file
-        gc.collect()
     del list_of_links
     gc.collect()
 

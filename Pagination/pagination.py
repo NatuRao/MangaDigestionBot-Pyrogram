@@ -10,6 +10,7 @@ class pagination:
     chapterlen = None
 
     def send_buttons(self):
+        self.current_page = 1
         button = []
         button.append([InlineKeyboardButton('--Download All--', f'rkalotall:{self.mangaid}'), InlineKeyboardButton('--Download This Page--', f'rkalotpage:')])
         for name, link in self.ch_linkname[self.current_page - 1].items():

@@ -3,7 +3,7 @@ from config import bot
 
 from Helper.helper import start_text, help_text, about_text
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.types import Message, MenuButton
 
 class starter:
 

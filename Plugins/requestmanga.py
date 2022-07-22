@@ -2,7 +2,7 @@ from config import bot
 
 from API.requestmangaapi import requestmangaapi as rmanga
 
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from pyrogram.types import Message
 
 class requestmanga:
@@ -14,7 +14,8 @@ class requestmanga:
             await bot.send_photo(
                 chat_id=message.chat.id,
                 caption="𝖢𝗈𝗆𝗆𝖺𝗇𝖽 𝗆𝗎𝗌𝗍 𝖻𝖾 𝗎𝗌𝖾𝖽 𝗅𝗂𝗄𝖾 𝗍𝗁𝗂𝗌\n/request <manga name>\nexample: \n`/request Grand Blue`\n`/request Grand Blue, Demon Slayer`",
-                photo="https://telegra.ph/file/3fed929e6b539b456c470.jpg"
+                photo="https://telegra.ph/file/3fed929e6b539b456c470.jpg",
+                parse_mode=enums.parse_mode.ParseMode.MARKDOWN
             )
 
         elif "/request" in message.text:

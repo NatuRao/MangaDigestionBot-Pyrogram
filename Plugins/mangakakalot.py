@@ -133,6 +133,10 @@ class mangakakalot:
             chapternum.pop(0)
             chapternum = ''.join(chapternum)
 
+            await callback.answer(
+                text=f"Downloading {chapternum}"
+            )
+
             pages = kalot.get_chapter_pages(pagi_obj.chapterid, chapternum)
 
             if pages == "Invalid Mangaid or chapter number":

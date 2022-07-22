@@ -1,3 +1,4 @@
+from operator import is_
 from config import bot
 
 from Plugins.starter import starter

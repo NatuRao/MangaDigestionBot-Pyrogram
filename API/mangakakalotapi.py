@@ -1,3 +1,4 @@
+from wsgiref.simple_server import demo_app
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -71,10 +72,18 @@ class mangakakalotapi:
                     for i in splitstr:
                         if i != "":
                             detailslist.append(i)
-            mangaalter = detailslist[0]
-            mangaauthor = detailslist[1]
-            mangastatus = detailslist[2]
-            mangagenre = detailslist[3]
+            # print(detailslist)
+            if len(detailslist) == 4:
+                mangaalter = detailslist[0]
+                mangaauthor = detailslist[1]
+                mangastatus = detailslist[2]
+                mangagenre = detailslist[3]
+            
+            elif len(detailslist) == 3:
+                mangaalter = "N/A"
+                mangaauthor = detailslist[0]
+                mangastatus = detailslist[1]
+                mangagenre = detailslist[2]
         else:
             url = f"https://mangakakalot.com/manga/{mangaid}"
             response = requests.get(url)

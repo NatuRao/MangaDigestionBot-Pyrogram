@@ -25,7 +25,7 @@ class mangakakalot:
         if "/kalot" == message.text:
             await bot.send_photo(
                 chat_id=message.chat.id,
-                caption="𝖢𝗈𝗆𝗆𝖺𝗇𝖽 𝗆𝗎𝗌𝗍 𝖻𝖾 𝗎𝗌𝖾𝖽 𝗅𝗂𝗄𝖾 𝗍𝗁𝗂𝗌\n/<host command> <name of manga>\nmangakakalot example: `/kalot Grand Blue`",
+                caption="𝖢𝗈𝗆𝗆𝖺𝗇𝖽 𝗆𝗎𝗌𝗍 𝖻𝖾 𝗎𝗌𝖾𝖽 𝗅𝗂𝗄𝖾 𝗍𝗁𝗂𝗌\n/<host command> <name of manga>\n\nmangakakalot example: `/kalot Grand Blue`",
                 photo="https://telegra.ph/file/3fed929e6b539b456c470.jpg",
                 parse_mode=enums.parse_mode.ParseMode.MARKDOWN
             )

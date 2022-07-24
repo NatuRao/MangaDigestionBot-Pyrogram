@@ -22,23 +22,23 @@ class requestmanga:
        
 
 #             For pausing requests
-            await bot.send_photo(
-                chat_id=message.chat.id,
-                caption="Requests are temporarily suspended; please wait for the specified date to arrive.",
-                photo="https://telegra.ph/file/2f326e52442f050b7e880.png"
-            )
-            
-#             For taking requests
-#             text = message.text.split()
-#             text.pop(0)
-
-#             manga_name = " ".join(text)
-#             name = message.from_user.first_name
-#             username = message.from_user.username
-
-#             rmanga.add_manganame(manga_name, name, username)
 #             await bot.send_photo(
 #                 chat_id=message.chat.id,
-#                 caption="Your request is added and sent to @MangaDigestion",
-#                 photo="https://telegra.ph/file/4ad245404396b00da4d46.jpg"
+#                 caption="Requests are temporarily suspended; please wait for the specified date to arrive.",
+#                 photo="https://telegra.ph/file/2f326e52442f050b7e880.png"
 #             )
+            
+#             For taking requests
+            text = message.text.split()
+            text.pop(0)
+
+            manga_name = " ".join(text)
+            name = message.from_user.first_name
+            username = message.from_user.username
+
+            rmanga.add_manganame(manga_name, name, username)
+            await bot.send_photo(
+                chat_id=message.chat.id,
+                caption="Your request is added and sent to @MangaDigestion",
+                photo="https://telegra.ph/file/4ad245404396b00da4d46.jpg"
+            )

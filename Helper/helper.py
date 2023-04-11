@@ -1,3 +1,5 @@
+# This file will contain text that will be sent to the user, when he/she execute commands
+
 start_text = """Welcome to MangaDigestionBot. Here you can Download and Request for Mangas.
 
 Please read the Instructions carefully before surfing in...

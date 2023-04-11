@@ -1,3 +1,4 @@
+# Importing needed modules
 from warnings import filters
 from config import bot
 
@@ -7,6 +8,7 @@ from pyrogram.types import Message
 
 class starter:
 
+    # /start command to send greetings to the user
     @bot.on_message(filters=filters.command(['start']))
     async def on_start(client: Client, message: Message):
 
@@ -19,6 +21,7 @@ class starter:
             parse_mode=enums.parse_mode.ParseMode.MARKDOWN
         )
 
+    # /help command to send help text to the user
     @bot.on_message(filters=filters.command(['help']))
     async def on_help(client: Client, message: Message):
 
@@ -28,6 +31,7 @@ class starter:
             parse_mode=enums.parse_mode.ParseMode.MARKDOWN
         )
 
+    # /about command to send more information about the bot
     @bot.on_message(filters=filters.command('about'))
     async def on_about(client: Client, message: Message):
 

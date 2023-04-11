@@ -1,6 +1,7 @@
 import gspread
 from datetime import date
 
+# Configuring Google Spread Sheets Key
 ss = gspread.service_account('gspreadkey/mangadigestionbot.json')
 sh = ss.open('MangaRequests')
 wks = sh.worksheet('Sheet1')
@@ -10,7 +11,8 @@ class requestmangaapi:
     # def next_available_row(wks):
     #     str_list = list(filter(None, wks.col_values(1)))
     #     return str(len(str_list)+1)
-
+    
+    # Adding fetched requests to Google Sheet
     def add_manganame(manga_name, name, username):
         manga_name_list = manga_name.split(",")
         for manga_name in manga_name_list:

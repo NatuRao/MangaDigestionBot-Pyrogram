@@ -1,3 +1,6 @@
+# This file will handle all commands related to mangakakalot
+
+# Importing Related Modules
 from ast import parse
 from multiprocessing import parent_process
 import os
@@ -13,12 +16,14 @@ from API.mangakakalotapi import mangakakalotapi as kalot
 from config import bot
 from itertools import islice
 
+# Creating a pagi object for Pagination
 pagi_obj = pagi()
 
 class mangakakalot:
 
     ################### Mangakakalot Things ###################
 
+    # /kalot command to fetch entered manganame as a list from the website and show it to the user
     @bot.on_message(filters=filters.command(['kalot']))
     async def on_kalot(client: Client, message: Message):
 
@@ -73,6 +78,8 @@ class mangakakalot:
             del results
             gc.collect()
 
+    # The below block is not a command, it's just a callback_query for the button that will be pressed by the user
+    # It'll execute the function which will fetch the MangaInformation from the website and show it to the user
     @bot.on_callback_query(filters=filters.regex(r'skalot:'))
     async def callback_kalot(client: Client, callback: CallbackQuery):
 
@@ -127,6 +134,7 @@ class mangakakalot:
         del chapterlinks
         gc.collect()
 
+    # It's a callback query to  download the chapter images from the website and show it to the user.
     @bot.on_callback_query(filters=filters.regex(r'rkalot:'))
     async def callback_rkalot(client: Client, callback: CallbackQuery):
 
@@ -177,7 +185,7 @@ class mangakakalot:
 
             print(f"Exception {e}")
 
-
+    # This callback_query is to download the current page displayed in telegram bot
     @bot.on_callback_query(filters=filters.regex(r'rkalotpage:'))
     async def event_handler_kalot(client: Client, callback: CallbackQuery):
 
@@ -231,6 +239,7 @@ class mangakakalot:
             print(f"Exception {e}")
 
     
+    # This callback_query is used to fetch all chapters from the website and send it to the users in pdf form.
     @bot.on_callback_query(filters=filters.regex(r'rkalotall:'))
     async def event_handler_kalot(client: Client, callback: CallbackQuery):
 

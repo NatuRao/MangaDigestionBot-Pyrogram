@@ -1,3 +1,6 @@
+# This file will handle any commands related to manga requests
+
+# Importing Needed Modules
 from config import bot
 
 from API.requestmangaapi import requestmangaapi as rmanga
@@ -6,6 +9,8 @@ from pyrogram import Client, filters, enums
 from pyrogram.types import Message
 
 class requestmanga:
+    
+    # /request command to request a manga
     @bot.on_message(filters=filters.regex(r"^/request"))
     async def event_handler_request_manga(client: Client, message: Message):
 
